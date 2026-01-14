@@ -15,7 +15,6 @@ export function useUserViewModel(eventVM) {
     userModel.user = null;
     setUser(null);
 
-    // Clear events on logout
     if (eventVM) {
       eventVM.clearEvents();
     }
