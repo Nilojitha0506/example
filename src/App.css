@@ -1,10 +1,12 @@
-/* Existing styles remain the same */
+/* === Global === */
 body {
   margin: 0;
-  font-family: Arial, sans-serif;
-  background-color: #f0f4f8;
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(to right, #1f4037, #99f2c8);
+  color: #333;
 }
 
+/* === App container flex === */
 .app-container {
   display: flex;
   flex-direction: column;
@@ -12,41 +14,113 @@ body {
   text-align: center;
 }
 
-header {
-  background-color: #4f46e5;
-  color: white;
-  padding: 2rem;
-}
-
+/* === Main content should expand === */
 main {
   flex: 1;
+  padding: 1rem;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  gap: 1rem;
+  justify-content: flex-start;
 }
 
-button {
-  background-color: #4f46e5;
+/* === Header === */
+header.header {
+  padding: 2rem;
   color: white;
+  background: linear-gradient(to right, #11998e, #38ef7d);
+  width: 100%;
+  text-align: center;
+}
+
+header h1,
+header p {
+  margin: 0 auto;
+  text-align: center;
+}
+
+/* === Footer === */
+footer.footer {
+  background-color: rgba(0, 0, 0, 0.1);
+  padding: 1rem;
+  width: 100%;
+  text-align: center;
+}
+
+/* === Buttons === */
+button {
+  margin: 0.5rem;
+  padding: 0.6rem 1.2rem;
   border: none;
-  padding: 0.8rem 1.5rem;
-  border-radius: 5px;
+  border-radius: 50px;
   cursor: pointer;
-  font-size: 16px;
+  font-weight: bold;
+  transition: all 0.3s ease;
 }
 
 button:hover {
-  background-color: #6366f1;
+  transform: scale(1.05);
 }
 
-footer {
-  background-color: #e0e7ff;
-  padding: 1rem;
+.highlight-button {
+  background: #ff416c;
+  color: white;
 }
 
-/* Modal styles */
+.highlight-button:hover {
+  background: #ff4b2b;
+}
+
+/* === Events List === */
+.events-container {
+  margin: 2rem auto;
+  max-width: 600px;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 15px;
+  padding: 1.5rem;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.events-container ul {
+  list-style: none;
+  padding: 0;
+}
+
+.events-container li {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin: 0.8rem 0;
+  padding: 0.5rem;
+  border-bottom: 1px solid #ddd;
+}
+
+.add-event {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+.add-event input {
+  padding: 0.5rem;
+  margin: 0.3rem;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  flex: 1 1 150px;
+}
+
+.add-event button {
+  background: #38ef7d;
+  color: white;
+  flex: 1 1 120px;
+}
+
+.add-event button:hover {
+  background: #11998e;
+}
+
+/* === Modal === */
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -54,22 +128,65 @@ footer {
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
-  /* semi-transparent background */
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 1000;
 }
 
 .modal {
   background-color: white;
   padding: 2rem;
-  border-radius: 10px;
+  border-radius: 15px;
   max-width: 400px;
-  text-align: center;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  width: 90%;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4);
 }
 
-.modal button {
-  margin-top: 1rem;
+/* === Media Queries === */
+@media (max-width: 768px) {
+  header h1 {
+    font-size: 2rem;
+  }
+
+  header p {
+    font-size: 1rem;
+  }
+
+  .events-container {
+    padding: 1rem;
+  }
+
+  .events-container li {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .add-event {
+    flex-direction: column;
+  }
+
+  .add-event input,
+  .add-event button {
+    width: 90%;
+    margin: 0.3rem auto;
+  }
+}
+
+@media (max-width: 480px) {
+  header h1 {
+    font-size: 1.5rem;
+  }
+
+  header p {
+    font-size: 0.9rem;
+  }
+
+  button {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+  }
+
+  .modal {
+    padding: 1rem;
+  }
 }
