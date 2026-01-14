@@ -1,7 +1,6 @@
 import React from "react";
-import "../App.css";
 
-const ModalView = ({ isOpen, onClose, title, content }) => {
+export default function ModalView({ isOpen, onClose, title, content }) {
   if (!isOpen) return null;
 
   return (
@@ -9,10 +8,10 @@ const ModalView = ({ isOpen, onClose, title, content }) => {
       <div className="modal">
         <h2>{title}</h2>
         <p>{content}</p>
-        <button onClick={onClose}>Close</button>
+        <button className="highlight-button" onClick={onClose}>
+          Close
+        </button>
       </div>
     </div>
   );
-};
-
-export default ModalView;
+}

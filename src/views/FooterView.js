@@ -1,10 +1,9 @@
 import React from "react";
-import "../App.css";
 
-const FooterView = () => (
-  <footer className="footer">
-    <p>© 2026 Sports Arena. All rights reserved.</p>
-  </footer>
-);
-
-export default FooterView;
+export default function FooterView() {
+  return (
+    <footer className="footer">
+      &copy; 2026 Sports Arena. All rights reserved.
+    </footer>
+  );
+}

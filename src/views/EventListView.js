@@ -1,34 +1,42 @@
 import React, { useState } from "react";
-import { eventController } from "../controllers/eventController";
-import "../App.css";
 
-const EventListView = () => {
-  const [events, setEvents] = useState(eventController.getEvents());
+export default function EventListView({ events, onAdd, onDelete, userVM }) {
   const [newEvent, setNewEvent] = useState("");
   const [newDate, setNewDate] = useState("");
 
-  const addEvent = () => {
-    if (newEvent && newDate) {
-      eventController.addEvent({ name: newEvent, date: newDate });
-      setEvents(eventController.getEvents());
-      setNewEvent("");
-      setNewDate("");
+  const handleAdd = () => {
+    if (!userVM.user) {
+      alert("You must be logged in to add an event!");
+      return;
     }
-  };
+    if (!newEvent || !newDate) {
+      alert("Please enter both event name and date!");
+      return;
+    }
+    const today = new Date();
+    const inputDate = new Date(newDate);
 
-  const removeEvent = (name) => {
-    eventController.removeEvent(name);
-    setEvents(eventController.getEvents());
+    today.setHours(0, 0, 0, 0);
+    inputDate.setHours(0, 0, 0, 0);
+
+    if (inputDate < today) {
+      alert("You cannot add an event with a past date!");
+      return;
+    }
+    onAdd(newEvent, newDate);
+    setNewEvent("");
+    setNewDate("");
   };
 
   return (
     <div className="events-container">
       <h2>Upcoming Events</h2>
       <ul>
-        {events.map((e, i) => (
-          <li key={i}>
-            <span>{e.name} - <strong>{e.date}</strong></span>
-            <button onClick={() => removeEvent(e.name)}>Remove</button>
+        {events.length === 0 && <li>No events yet</li>}
+        {events.map((e) => (
+          <li key={e.id}>
+            {e.title} - <strong>{e.date}</strong>
+            <button onClick={() => onDelete(e.id)}>Remove</button>
           </li>
         ))}
       </ul>
@@ -45,10 +53,8 @@ const EventListView = () => {
           value={newDate}
           onChange={(e) => setNewDate(e.target.value)}
         />
-        <button onClick={addEvent}>Add Event</button>
+        <button onClick={handleAdd}>Add Event</button>
       </div>
     </div>
   );
-};
-
-export default EventListView;
+}

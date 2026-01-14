@@ -1,44 +1,36 @@
-import React, { useState } from "react";
+import React from "react";
 import HeaderView from "./HeaderView";
 import FooterView from "./FooterView";
 import ModalView from "./ModalView";
 import EventListView from "./EventListView";
-import { modalController } from "../controllers/modalController";
 import "../App.css";
 
-const AppView = () => {
-  const [isModalOpen, setModalOpen] = useState(false);
-
-  const openModal = () => {
-    modalController.open();
-    setModalOpen(true);
-  };
-
-  const closeModal = () => {
-    modalController.close();
-    setModalOpen(false);
-  };
-
+export default function AppView({ modalVM, eventVM, userVM }) {
   return (
     <div className="app-container">
-      <HeaderView />
+      <HeaderView
+        userVM={userVM}
+        onAddClick={modalVM.open}
+      />
+
       <main>
-        <button className="highlight-button" onClick={openModal}>
-          Learn More
-        </button>
-
-        <ModalView
-          isOpen={isModalOpen}
-          onClose={closeModal}
-          title="Welcome to Sports Arena!"
-          content="Check out upcoming events and never miss a game!"
+        <EventListView
+          events={eventVM.events}
+          onAdd={eventVM.addEvent}
+          onDelete={eventVM.removeEvent}
+          userVM={userVM} 
         />
-
-        <EventListView />
+        {modalVM.isOpen && (
+          <ModalView
+            isOpen={modalVM.isOpen}
+            onClose={modalVM.close}
+            title="Welcome to Sports Arena!"
+            content="Check out upcoming events and never miss a game!"
+          />
+        )}
       </main>
+
       <FooterView />
     </div>
   );
-};
-
-export default AppView;
+}
