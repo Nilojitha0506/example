@@ -1,13 +1,13 @@
 import React from "react";
 import AppView from "./views/AppView";
-import { modalViewModel } from "./viewmodels/modalViewmodel";
-import { eventViewModel } from "./viewmodels/eventViewmodel";
-import { userViewModel } from "./viewmodels/userViewmodel";
+import { useModalViewModel } from "./viewmodels/modalViewmodel";
+import { useEventViewModel } from "./viewmodels/eventViewmodel";
+import { useUserViewModel } from "./viewmodels/userViewmodel";
 
 export default function App() {
-  const modalVM = modalViewModel();
-  const eventVM = eventViewModel();
-  const userVM = userViewModel();
+  const modalVM = useModalViewModel();
+  const eventVM = useEventViewModel();
+  const userVM = useUserViewModel();
 
   return <AppView modalVM={modalVM} eventVM={eventVM} userVM={userVM} />;
 }

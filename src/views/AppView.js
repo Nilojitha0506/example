@@ -8,24 +8,23 @@ import "../App.css";
 export default function AppView({ modalVM, eventVM, userVM }) {
   return (
     <div className="app-container">
-      <HeaderView
-        userVM={userVM}
-        onAddClick={modalVM.open}
-      />
+      <HeaderView userVM={userVM} onLoginClick={modalVM.open} />
 
       <main>
         <EventListView
           events={eventVM.events}
           onAdd={eventVM.addEvent}
           onDelete={eventVM.removeEvent}
-          userVM={userVM} 
+          userVM={userVM}
         />
+
         {modalVM.isOpen && (
           <ModalView
             isOpen={modalVM.isOpen}
             onClose={modalVM.close}
-            title="Welcome to Sports Arena!"
-            content="Check out upcoming events and never miss a game!"
+            title="Login"
+            content="Enter your name to login"
+            userVM={userVM}
           />
         )}
       </main>

@@ -1,33 +1,29 @@
-import React, { useState } from "react";
+import React from "react";
 
-export default function HeaderView({ userVM, onAddClick }) {
-  const [username, setUsername] = useState("");
-
+export default function HeaderView({ userVM, onLoginClick }) {
   return (
     <header className="header">
       <h1>Sports Arena</h1>
-      <p>Get ready for upcoming sports events!</p>
+      <p>Never miss your favorite events!</p>
 
-      {userVM.user ? (
-        <>
-          <span>Welcome, {userVM.user.name}</span>
-          <button onClick={userVM.logout}>Logout</button>
-        </>
-      ) : (
-        <>
-          <input
-            type="text"
-            placeholder="Enter name"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-          />
-          <button onClick={() => userVM.login(username)}>Login</button>
-        </>
+      {!userVM.user && (
+        <button className="highlight-button" onClick={onLoginClick}>
+          Login
+        </button>
       )}
 
-      <button className="highlight-button" onClick={onAddClick}>
-        Learn More
-      </button>
+      {userVM.user && (
+        <div style={{ marginTop: "1rem" }}>
+          <span>Welcome, {userVM.user.name}!</span>
+          <button
+            className="highlight-button"
+            style={{ marginLeft: "1rem" }}
+            onClick={userVM.logout}
+          >
+            Logout
+          </button>
+        </div>
+      )}
     </header>
   );
 }
