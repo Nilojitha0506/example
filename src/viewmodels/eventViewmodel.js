@@ -15,11 +15,6 @@ export function useEventViewModel() {
       return;
     }
 
-    if (eventModel.getEvents().some(e => e.date === event.date)) {
-      alert("An event with this date already exists!");
-      return;
-    }
-
     eventModel.addEvent(event);
     setEvents([...eventModel.getEvents()]);
   };
